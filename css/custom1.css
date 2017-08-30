@@ -1,0 +1,49 @@
+.chat-tab, .chat-frame-wrap{
+  position: fixed;
+  bottom: 0;
+  right: 10px;
+  border: 0 none;
+  z-index: 200;
+}
+
+.chat-tab{
+  padding: 10px 10px 8px;
+  font-size: 14px;
+  border-radius: 3px 3px 0 0;
+  font-weight: bold;
+}
+
+.chat-close{
+  border: 0 none;
+  background: #f5f7fa;
+  font-size: 16px;
+  border-radius: 50%;
+  position: absolute;
+  right: -5px;
+  top: -15px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0;
+}
+
+.chat-close:hover {
+  color: #027bc2;
+}
+
+.chat-frame-wrap{
+  width: 300px;
+}
+
+.chat-frame{
+  width: 300px;
+  height: 280px;
+  vertical-align: bottom;
+  border-radius: 3px 3px 0 0;
+}
+
+@media only screen and (max-width: 960px) {
+  .chat-tab, .chat-frame-wrap{
+    bottom: 60px;
+  }
+}
