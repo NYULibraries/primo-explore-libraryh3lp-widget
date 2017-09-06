@@ -1,11 +1,12 @@
 angular
   .module('libraryh3lpWidget', [])
-  .config(function($sceDelegateProvider) {
-    $sceDelegateProvider.resourceUrlWhitelist([
-      'self',
-      '**.libraryh3lp.com/**'
-    ])
-  })
+  .filter('trustUrl', ['$sce', function ($sce) {
+    return function(url) {
+      if (/^http(s)?:\/\/(.+\.)?libraryh3lp\.com.+$/.test(url)) {
+        return $sce.trustAsResourceUrl(url);
+      }
+    };
+  }])
   .controller('libraryh3lpWidgetController', ['libraryh3lpWidgetConfig', '$scope', function(libraryh3lpWidgetConfig, $scope) {
     this.$onInit = () => {
       $scope.config = libraryh3lpWidgetConfig;
@@ -22,6 +23,6 @@ angular
               '</button>'+
               '<div class="chat-frame-wrap" ng-show="showChatWidget">'+
               '<button class="chat-close ss-icon js-toggle-chat" title="Close chat window" ng-click="showChatWidget = !showChatWidget">&times;</button>'+
-                '<iframe class="chat-frame" ng-src="{{config.url}}" frameborder="0"></iframe>'+
+                '<iframe class="chat-frame" ng-src="{{config.url | trustUrl}}" frameborder="0"></iframe>'+
               '</div>'
   });
