@@ -16,6 +16,7 @@ angular
       $scope.config = libraryh3lpWidgetConfig;
       $scope.parentCtrl = this.parentCtrl;
     }
+    // Do facets exist?
     $scope.facetsExist = () => {
       try {
         return ($scope.parentCtrl.searchService.facetService.results.length > 0);
@@ -23,6 +24,7 @@ angular
         return false;
       }
     }
+    // Add the bottom padding class if there are facets
     $scope.bottomPadding = () => {
       if ($scope.facetsExist()) {
         return "chat-bottom-padding";
