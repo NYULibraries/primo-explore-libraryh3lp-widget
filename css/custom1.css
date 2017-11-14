@@ -43,7 +43,10 @@
 }
 
 @media only screen and (max-width: 960px) {
-  .chat-tab, .chat-frame-wrap{
+  .chat-bottom-padding {
     bottom: 60px;
+  }
+  body.md-dialog-is-showing .chat-bottom-padding {
+    bottom: 0 !important;
   }
 }
