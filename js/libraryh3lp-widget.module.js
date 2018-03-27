@@ -37,7 +37,7 @@ angular
                 {{config.prompt}}
               </button>
               <div class="chat-frame-wrap" ng-class="bottomPadding" ng-show="showChatWidget">
-              <button class="chat-close ss-icon js-toggle-chat" title="Close chat window" ng-click="showChatWidget = !showChatWidget">&times;</button>
+                <button class="chat-close ss-icon js-toggle-chat" title="Close chat window" ng-click="showChatWidget = !showChatWidget">&times;</button>
                 <iframe class="chat-frame" ng-src="{{config.url | trustUrl}}" frameborder="0"></iframe>
               </div>
               `
