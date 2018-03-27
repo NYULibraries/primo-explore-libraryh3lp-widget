@@ -4,7 +4,6 @@ describe('libraryh3lpWidgetController', () => {
 
   beforeEach(module('libraryh3lpWidget', ($provide) => {
     $provide.constant('libraryh3lpWidgetConfig', libraryh3lpWidgetConfig);
-    // TODO: mock trustUrl filter functionality
   }));
 
   let  $scope, $componentController;

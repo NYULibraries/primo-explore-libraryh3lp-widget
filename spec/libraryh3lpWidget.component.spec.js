@@ -25,7 +25,6 @@ describe('libraryh3lpWidget component', () => {
     scope.$digest();
   }));
 
-
   describe('buttons', () => {
     let btns;
     beforeEach(() => {
