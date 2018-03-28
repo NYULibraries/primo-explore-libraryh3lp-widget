@@ -12,24 +12,20 @@ angular
   }])
   // Controller for the component below
   .controller('libraryh3lpWidgetController', ['libraryh3lpWidgetConfig', '$scope', function(libraryh3lpWidgetConfig, $scope) {
+    const ctrl = this;
     this.$onInit = () => {
       $scope.config = libraryh3lpWidgetConfig;
-      $scope.parentCtrl = this.parentCtrl;
-    }
-    // Do facets exist?
-    $scope.facetsExist = () => {
-      try {
-        return ($scope.parentCtrl.searchService.facetService.results.length > 0);
-      } catch (e) {
-        return false;
-      }
-    }
-    // Add the bottom padding class if there are facets
-    $scope.bottomPadding = () => {
-      if ($scope.facetsExist()) {
-        return "chat-bottom-padding";
-      }
-    }
+      // Do facets exist?
+      $scope.facetsExist = (() => {
+        try {
+          return (ctrl.parentCtrl.searchService.facetService.results.length > 0);
+        } catch (e) {
+          return false;
+        }
+      })();
+      // Add the bottom padding class if there are facets
+      $scope.bottomPadding = { ["chat-bottom-padding"]: $scope.facetsExist };
+    };
   }])
   .component('prmExploreMainAfter', {
     bindings: {
@@ -37,12 +33,12 @@ angular
     },
     controller: 'libraryh3lpWidgetController',
     template: `
-              <button class="button chat-tab ss-chat js-toggle-chat" ng-class="bottomPadding()" ng-init="showChatWidget = false" ng-click="showChatWidget = !showChatWidget">
+              <button class="button chat-tab ss-chat js-toggle-chat" ng-class="bottomPadding" ng-init="showChatWidget = false" ng-click="showChatWidget = !showChatWidget">
                 <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.icon.set}}" icon-definition="{{config.icon.icon}}"></prm-icon>
                 {{config.prompt}}
               </button>
-              <div class="chat-frame-wrap" ng-class="bottomPadding()" ng-show="showChatWidget">
-              <button class="chat-close ss-icon js-toggle-chat" title="Close chat window" ng-click="showChatWidget = !showChatWidget">&times;</button>
+              <div class="chat-frame-wrap" ng-class="bottomPadding" ng-show="showChatWidget">
+                <button class="chat-close ss-icon js-toggle-chat" title="Close chat window" ng-click="showChatWidget = !showChatWidget">&times;</button>
                 <iframe class="chat-frame" ng-src="{{config.url | trustUrl}}" frameborder="0"></iframe>
               </div>
               `
