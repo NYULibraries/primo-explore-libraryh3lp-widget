@@ -12,12 +12,13 @@ angular
   }])
   // Controller for the component below
   .controller('libraryh3lpWidgetController', ['libraryh3lpWidgetConfig', '$scope', function(libraryh3lpWidgetConfig, $scope) {
+    const ctrl = this;
     this.$onInit = () => {
       $scope.config = libraryh3lpWidgetConfig;
       // Do facets exist?
       $scope.facetsExist = (() => {
         try {
-          return (this.parentCtrl.searchService.facetService.results.length > 0);
+          return (ctrl.parentCtrl.searchService.facetService.results.length > 0);
         } catch (e) {
           return false;
         }
