@@ -40,7 +40,7 @@ describe('libraryh3lpWidgetController', () => {
     });
 
     it('should intialize facetsExist', () => {
-      expect($scope.facetsExist).toBeDefined;
+      expect($scope.facetsExist).toBeDefined();
     });
 
     it('should initialize facetsExist to false if no results', () => {
