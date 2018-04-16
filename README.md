@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/NYULibraries/primo-explore-libraryh3lp-widget.svg?branch=master)](https://travis-ci.org/NYULibraries/primo-explore-libraryh3lp-widget)
 [![npm version](https://img.shields.io/npm/v/primo-explore-libraryh3lp-widget.svg)](https://www.npmjs.com/package/primo-explore-libraryh3lp-widget)
+[![Coverage Status](https://coveralls.io/repos/github/NYULibraries/primo-explore-libraryh3lp-widget/badge.svg?branch=master)](https://coveralls.io/github/NYULibraries/primo-explore-libraryh3lp-widget?branch=master)
 
 ## Description
 
