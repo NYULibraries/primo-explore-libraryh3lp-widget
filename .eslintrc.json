@@ -15,7 +15,8 @@
     "inject": false
   },
   "env": {
-    "jasmine": true
+    "jasmine": true,
+    "node": true
   },
   "plugins": [
     "angular"

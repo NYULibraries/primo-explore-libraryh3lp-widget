@@ -1,6 +1,4 @@
-coverage/
-spec/
-.babelrc
-.eslintrc
-.travis.yml
+src/
+.*
 karma.conf.js
+yarn-error.log
