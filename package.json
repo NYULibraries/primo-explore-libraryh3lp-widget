@@ -2,7 +2,7 @@
   "name": "primo-explore-libraryh3lp-widget",
   "version": "1.0.5",
   "description": "ExLibris Primo New UI plugin for adding a libraryh3lp chat widget",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "test": "karma start --single-run",
     "test:chrome-debugger": "karma start --browsers=Chrome --single-run=false --debug",
