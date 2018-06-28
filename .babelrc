@@ -6,5 +6,8 @@
         "istanbul"
       ]
     }
-  }
+  },
+  "plugins": [
+    "transform-html-import-to-string"
+  ]
 }

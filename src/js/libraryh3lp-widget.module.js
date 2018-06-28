@@ -1,3 +1,5 @@
+import template from '../html/template.html';
+
 angular
   // Name our module
   .module('libraryh3lpWidget', [])
@@ -32,14 +34,5 @@ angular
       parentCtrl: '<'
     },
     controller: 'libraryh3lpWidgetController',
-    template: `
-              <button class="button chat-tab ss-chat js-toggle-chat" ng-class="bottomPadding" ng-init="showChatWidget = false" ng-click="showChatWidget = !showChatWidget">
-                <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.icon.set}}" icon-definition="{{config.icon.icon}}"></prm-icon>
-                {{config.prompt}}
-              </button>
-              <div class="chat-frame-wrap" ng-class="bottomPadding" ng-show="showChatWidget">
-                <button class="chat-close ss-icon js-toggle-chat" title="Close chat window" ng-click="showChatWidget = !showChatWidget">&times;</button>
-                <iframe class="chat-frame" ng-src="{{config.url | trustUrl}}" frameborder="0"></iframe>
-              </div>
-              `
+    template
   });
