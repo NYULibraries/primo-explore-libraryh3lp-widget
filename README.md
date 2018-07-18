@@ -80,3 +80,20 @@ Finally you'll need to add the following lines to your CSS to stylize the colors
   background: yourBackgroundColor;
 }
 ```
+
+In order to add focus styling for better visual accessibility, you can use the following CSS to stylize this:
+
+```CSS
+.chat-tab:focus {
+  -webkit-box-shadow: inset 0 0 0 2px yourFocusColor;
+  box-shadow: inset 0 0 0 2px yourFocusColor;
+  overflow: -moz-hidden-unscrollable;
+}
+
+.chat-close:focus {
+    -webkit-box-shadow: inset 0 0 0 2px yourFocusColor;
+    box-shadow: inset 0 0 0 2px yourFocusColor;
+    overflow: -moz-hidden-unscrollable;
+  }
+}
+```
