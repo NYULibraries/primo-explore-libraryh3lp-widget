@@ -29,7 +29,7 @@ angular
       $scope.bottomPadding = { ["chat-bottom-padding"]: $scope.facetsExist };
     };
   }])
-  .component('prmExploreMainAfter', {
+  .component('prmSilentLoginAfter', {
     bindings: {
       parentCtrl: '<'
     },
