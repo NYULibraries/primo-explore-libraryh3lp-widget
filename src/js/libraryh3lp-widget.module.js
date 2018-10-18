@@ -1,7 +1,6 @@
 import template from '../html/template.html';
 
 angular
-  // Name our module
   .module('libraryh3lpWidget', [])
   // Add the libraryh3lp url to trusted url sources
   // so angular doesn't block it from an iframe
@@ -14,12 +13,16 @@ angular
   }])
   .factory('libraryh3lpWidgetResultsList', function () {
     // A factory that is used to get/update state of 'results' across components
-    let length = 0;
+    const model = {
+      length: 0
+    };
     return {
-      updateLength(newlength) {
-        length = newlength;
+      updateLength(newLength) {
+        model.length = newLength;
       },
-      getLength: () => length,
+      getLength() {
+        return model.length;
+      }
     };
   })
   .controller('libraryh3lpWidgetController', ['libraryh3lpWidgetConfig', '$scope', 'libraryh3lpWidgetResultsList', function (libraryh3lpWidgetConfig, $scope, libraryh3lpWidgetResultsList) {
@@ -27,14 +30,17 @@ angular
     let prevResultsListLength;
     this.$onInit = function () {
       $scope.config = libraryh3lpWidgetConfig;
-      $scope.klasses = { 'chat-bottom-padding': false };
+      $scope.klasses = {
+        'chat-bottom-padding': false
+      };
       prevResultsListLength = libraryh3lpWidgetResultsList.getLength();
     };
 
     this.$doCheck = function () {
       const newResultsListLength = libraryh3lpWidgetResultsList.getLength();
-      if (!angular.equals(newResultsListLength, prevResultsListLength)) {
+      if (newResultsListLength !== prevResultsListLength) {
         $scope.klasses['chat-bottom-padding'] = !!newResultsListLength;
+        prevResultsListLength = newResultsListLength;
       }
     };
   }])
@@ -52,8 +58,10 @@ angular
     };
 
     this.$doCheck = function () {
-      if (!angular.equals(prevResultsListLength, ctrl.parentCtrl.searchService.facetService.results.length)) {
-        libraryh3lpWidgetResultsList.updateLength(ctrl.parentCtrl.searchService.facetService.results.length);
+      const newResultsListLength = ctrl.parentCtrl.searchService.facetService.results.length;
+      if (newResultsListLength !== prevResultsListLength) {
+        libraryh3lpWidgetResultsList.updateLength(newResultsListLength);
+        prevResultsListLength = newResultsListLength;
       }
     };
   }])
