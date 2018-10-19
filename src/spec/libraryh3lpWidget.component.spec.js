@@ -10,15 +10,6 @@ describe('libraryh3lpWidget component', () => {
     $compile = _$compile_;
     const scope = $rootScope.$new();
 
-    parentCtrl = {
-      searchService: {
-        facetService: {
-          results: [null, null, null]
-        }
-      }
-    };
-
-    scope.parentCtrl = parentCtrl;
     scope.config = libraryh3lpWidgetConfig;
     element = angular.element(`<prm-explore-main-after parentCtrl="parentCtrl" />`);
     element = $compile(element)(scope);
