@@ -10,9 +10,12 @@ Add a [libraryh3lp](https://libraryh3lp.com/) embedded chat widget to the bottom
 
 ### Screenshot
 
-![screenshot](screenshot1.png)
+![screenshot1](https://github.com/NYULibraries/primo-explore-libraryh3lp-widget/raw/master/.docs/screenshot1.png)
 
-![screenshot](screenshot2.png)
+![screenshot2](https://github.com/NYULibraries/primo-explore-libraryh3lp-widget/raw/master/.docs/screenshot2.png)
+
+![gif](https://github.com/NYULibraries/primo-explore-libraryh3lp-widget/raw/master/.docs/demo-responsive-chat.gif)
+
 
 ## Installation
 
