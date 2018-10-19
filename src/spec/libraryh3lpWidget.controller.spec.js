@@ -8,26 +8,19 @@ describe('libraryh3lpWidgetController', () => {
 
   let  $scope, $componentController;
   let controller, bindings;
-  beforeEach(inject(function(_$rootScope_, _$componentController_,) {
+  let libraryh3lpWidgetResultsList;
+  beforeEach(inject(function (_$rootScope_, _$componentController_, _libraryh3lpWidgetResultsList_) {
+    libraryh3lpWidgetResultsList = _libraryh3lpWidgetResultsList_;
     const $rootScope = _$rootScope_;
     $componentController = _$componentController_;
     $scope = $rootScope.$new();
 
-    // content of results irrelevant because it's just checking for length'
-    const parentCtrl = {
-      searchService: {
-        facetService: {
-          results: [null, null, null]
-        }
-      }
-    };
-    bindings = { parentCtrl };
-
-    controller = $componentController('prmExploreMainAfter', { $scope }, bindings);
+    controller = $componentController('prmSilentLoginAfter', { $scope }, bindings);
   }));
 
   describe('$onInit', () => {
     beforeEach(() => {
+      spyOn(libraryh3lpWidgetResultsList, 'getLength').and.returnValue(0);
       controller.$onInit();
     });
 
@@ -39,33 +32,46 @@ describe('libraryh3lpWidgetController', () => {
       expect($scope.config).toBeDefined();
     });
 
-    it('should intialize facetsExist', () => {
-      expect($scope.facetsExist).toBeDefined();
+    it('should intialize klasses', () => {
+      expect($scope.klasses).toBeDefined();
     });
 
-    it('should initialize facetsExist to false if no results', () => {
-      const noResultsBinding = angular.copy(bindings);
-      noResultsBinding.parentCtrl.searchService.facetService.results = [];
-
-      const $noFacetsScope = $scope.$new();
-      const noResultsController = $componentController('prmExploreMainAfter',
-        { $scope: $noFacetsScope },
-        noResultsBinding
-      );
-
-      noResultsController.$onInit();
-      expect($noFacetsScope.facetsExist).toBe(false);
+    it(`should getLength from libraryh3lpWidgetResultsList`, () => {
+      expect(libraryh3lpWidgetResultsList.getLength).toHaveBeenCalled();
     });
 
-    describe('if facetsExist', () => {
-      it('should assign facetsExists to true', () => {
-        expect($scope.facetsExist).toBe(true);
+    describe(`when initializing 'chat-bottom-padding'`, () => {
+      it(`should be false if libraryh3lpWidgetResultsList.getLength() === 0`, () => {
+        expect($scope.klasses['chat-bottom-padding']).toBe(false);
       });
 
-      it('should have bottomPadding', () => {
-        expect($scope.bottomPadding['chat-bottom-padding']).toBe(true);
+      it(`should be true if libraryh3lpWidgetResultsList.getLength() > 0`, () => {
+        libraryh3lpWidgetResultsList.getLength.and.returnValue(10);
+
+        controller.$onInit();
+        expect($scope.klasses['chat-bottom-padding']).toBe(true);
       });
     });
   });
 
+  describe('$doCheck', () => {
+    describe(`klasses responds to libraryh3lpWidgetResultsList.getLength() changes`, () => {
+      beforeEach(() => {
+        spyOn(libraryh3lpWidgetResultsList, 'updateLength').and.stub();
+        spyOn(libraryh3lpWidgetResultsList, 'getLength').and.returnValue(0);
+        controller.$onInit();
+      });
+
+      it(`should change klasses['chat-bottom-padding'] to true if > 0`, () => {
+        libraryh3lpWidgetResultsList.getLength.and.returnValue(10);
+        controller.$doCheck();
+        expect($scope.klasses['chat-bottom-padding']).toBe(true);
+      });
+
+      it(`should change klasses['chat-bottom-padding'] to false if === 0`, () => {
+        controller.$doCheck();
+        expect($scope.klasses['chat-bottom-padding']).toBe(false);
+      });
+    });
+  });
 });

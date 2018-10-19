@@ -5,13 +5,12 @@ describe('libraryh3lpWidget component', () => {
     $provide.constant("libraryh3lpWidgetConfig", libraryh3lpWidgetConfig);
   }));
 
-  let $compile, element, parentCtrl;
+  let $compile, element;
   beforeEach(inject(function(_$compile_, $rootScope){
     $compile = _$compile_;
     const scope = $rootScope.$new();
 
-    scope.config = libraryh3lpWidgetConfig;
-    element = angular.element(`<prm-explore-main-after parentCtrl="parentCtrl" />`);
+    element = angular.element(`<prm-silent-login-after />`);
     element = $compile(element)(scope);
     scope.$digest();
   }));
@@ -93,7 +92,5 @@ describe('libraryh3lpWidget component', () => {
         expect(ngSrc).toEqual(libraryh3lpWidgetConfig.url);
       });
     });
-
   });
-
 });

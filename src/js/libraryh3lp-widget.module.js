@@ -28,15 +28,16 @@ angular
   .controller('libraryh3lpWidgetController', ['libraryh3lpWidgetConfig', '$scope', 'libraryh3lpWidgetResultsList', function (libraryh3lpWidgetConfig, $scope, libraryh3lpWidgetResultsList) {
     // controller for the h3lp widget itself
     let prevResultsListLength;
-    this.$onInit = function () {
+    const ctrl = this;
+    ctrl.$onInit = function () {
       $scope.config = libraryh3lpWidgetConfig;
-      $scope.klasses = {
-        'chat-bottom-padding': false
-      };
       prevResultsListLength = libraryh3lpWidgetResultsList.getLength();
+      $scope.klasses = {
+        'chat-bottom-padding': !!prevResultsListLength,
+      };
     };
 
-    this.$doCheck = function () {
+    ctrl.$doCheck = function () {
       const newResultsListLength = libraryh3lpWidgetResultsList.getLength();
       if (newResultsListLength !== prevResultsListLength) {
         $scope.klasses['chat-bottom-padding'] = !!newResultsListLength;
@@ -52,12 +53,14 @@ angular
     // controller whose pure function is to maintain updated results length in the libraryh3lpWidgetResultsList factory
     const ctrl = this;
     let prevResultsListLength;
-    this.$onInit = function () {
+    // Update length in the factory on initialize
+    ctrl.$onInit = function () {
       prevResultsListLength = ctrl.parentCtrl.searchService.facetService.results.length;
       libraryh3lpWidgetResultsList.updateLength(prevResultsListLength);
     };
 
-    this.$doCheck = function () {
+    // If length change, update the factory
+    ctrl.$doCheck = function () {
       const newResultsListLength = ctrl.parentCtrl.searchService.facetService.results.length;
       if (newResultsListLength !== prevResultsListLength) {
         libraryh3lpWidgetResultsList.updateLength(newResultsListLength);
