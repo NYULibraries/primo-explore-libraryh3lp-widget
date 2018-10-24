@@ -5,12 +5,26 @@ describe('libraryh3lpWidget component', () => {
     $provide.constant("libraryh3lpWidgetConfig", libraryh3lpWidgetConfig);
   }));
 
-  let $compile, element;
-  beforeEach(inject(function(_$compile_, $rootScope){
-    $compile = _$compile_;
-    const scope = $rootScope.$new();
+  let element, scope;
+  const data = [null, null, null]
+  beforeEach(inject(function (_$compile_, _$rootScope_) {
+    const $compile = _$compile_;
+    const $rootScope = _$rootScope_;
+    scope = $rootScope.$new();
 
-    element = angular.element(`<prm-silent-login-after />`);
+    const parentCtrl = {
+      userSessionManagerService: {
+        searchStateService: {
+          resultObject: {
+            data,
+          }
+        }
+      }
+    };
+
+    scope.parentCtrl = parentCtrl;
+
+    element = angular.element(`<prm-silent-login-after parent-ctrl="parentCtrl" />`);
     element = $compile(element)(scope);
     scope.$digest();
   }));
@@ -30,9 +44,28 @@ describe('libraryh3lpWidget component', () => {
         btn = btns[0];
       });
 
-      it('should have ng-class directive', () => {
-        const ngClass = btn.getAttribute('ng-class');
-        expect(ngClass).toBeTruthy();
+      describe('dynamic classes', () => {
+        it('should have ng-class directive', () => {
+          const ngClass = btn.getAttribute('ng-class');
+          expect(ngClass).toBeTruthy();
+        });
+
+        it('should have chat-bottom-padding class', () => {
+          const hasClass = btn.className.indexOf('chat-bottom-padding') > -1;
+          expect(hasClass).toBe(true);
+        });
+
+        it('shouuld not have chat-bottom-padding class if search data empty', () => {
+          data.splice(0, data.length); // empty data
+          scope.$digest();
+          const hasClass = btn.className.indexOf('chat-bottom-padding') > -1;
+          expect(hasClass).toBe(false);
+        });
+
+        afterEach(() => {
+          data.splice(0, data.length);
+          data.push(null, null, null);
+        });
       });
 
       it('should have ng-click directive', () => {

@@ -8,19 +8,29 @@ describe('libraryh3lpWidgetController', () => {
 
   let  $scope, $componentController;
   let controller, bindings;
-  let libraryh3lpWidgetResultsList;
-  beforeEach(inject(function (_$rootScope_, _$componentController_, _libraryh3lpWidgetResultsList_) {
-    libraryh3lpWidgetResultsList = _libraryh3lpWidgetResultsList_;
+  const resultsList = [];
+  beforeEach(inject(function (_$rootScope_, _$componentController_) {
     const $rootScope = _$rootScope_;
     $componentController = _$componentController_;
     $scope = $rootScope.$new();
+
+    bindings = {
+      parentCtrl: {
+        userSessionManagerService: {
+          searchStateService: {
+            resultObject: {
+              data: resultsList,
+            }
+          }
+        }
+      }
+    };
 
     controller = $componentController('prmSilentLoginAfter', { $scope }, bindings);
   }));
 
   describe('$onInit', () => {
     beforeEach(() => {
-      spyOn(libraryh3lpWidgetResultsList, 'getLength').and.returnValue(0);
       controller.$onInit();
     });
 
@@ -29,49 +39,46 @@ describe('libraryh3lpWidgetController', () => {
     });
 
     it('should initialize config', () => {
-      expect($scope.config).toBeDefined();
+      expect(controller.config).toBeDefined();
     });
 
     it('should intialize klasses', () => {
-      expect($scope.klasses).toBeDefined();
+      expect(controller.klasses).toBeDefined();
     });
 
-    it(`should getLength from libraryh3lpWidgetResultsList`, () => {
-      expect(libraryh3lpWidgetResultsList.getLength).toHaveBeenCalled();
-    });
-
-    describe(`when initializing 'chat-bottom-padding'`, () => {
-      it(`should be false if libraryh3lpWidgetResultsList.getLength() === 0`, () => {
-        expect($scope.klasses['chat-bottom-padding']).toBe(false);
-      });
-
-      it(`should be true if libraryh3lpWidgetResultsList.getLength() > 0`, () => {
-        libraryh3lpWidgetResultsList.getLength.and.returnValue(10);
-
-        controller.$onInit();
-        expect($scope.klasses['chat-bottom-padding']).toBe(true);
+    describe('klasses', () => {
+      describe(`'chat-bottom-padding'`, () => {
+        it(`should be initialized as false`, () => {
+          expect(controller.klasses['chat-bottom-padding']).toBe(false);
+        });
       });
     });
   });
 
   describe('$doCheck', () => {
-    describe(`klasses responds to libraryh3lpWidgetResultsList.getLength() changes`, () => {
+    describe(`klasses responds to results length changes`, () => {
       beforeEach(() => {
-        spyOn(libraryh3lpWidgetResultsList, 'updateLength').and.stub();
-        spyOn(libraryh3lpWidgetResultsList, 'getLength').and.returnValue(0);
         controller.$onInit();
       });
 
       it(`should change klasses['chat-bottom-padding'] to true if > 0`, () => {
-        libraryh3lpWidgetResultsList.getLength.and.returnValue(10);
+        resultsList.push(null, null, null);
         controller.$doCheck();
-        expect($scope.klasses['chat-bottom-padding']).toBe(true);
+        expect(controller.klasses['chat-bottom-padding']).toBe(true);
       });
 
       it(`should change klasses['chat-bottom-padding'] to false if === 0`, () => {
+        resultsList.push(null, null, null);
         controller.$doCheck();
-        expect($scope.klasses['chat-bottom-padding']).toBe(false);
+        resultsList.splice(0, resultsList.length); // mutate array to empty it
+        controller.$doCheck();
+        expect(controller.klasses['chat-bottom-padding']).toBe(false);
       });
+    });
+
+    afterEach(() => {
+      resultsList.splice(0, resultsList.length);
+      resultsList.push(null, null, null);
     });
   });
 });
