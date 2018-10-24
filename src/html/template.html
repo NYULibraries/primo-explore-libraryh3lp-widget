@@ -1,8 +1,8 @@
-<button class="button chat-tab ss-chat js-toggle-chat" ng-class="klasses" ng-init="showChatWidget = false" ng-click="showChatWidget = !showChatWidget">
-  <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.icon.set}}" icon-definition="{{config.icon.icon}}"></prm-icon>
-  {{config.prompt}}
+<button class="button chat-tab ss-chat js-toggle-chat" ng-class="$ctrl.klasses" ng-init="showChatWidget = false" ng-click="showChatWidget = !showChatWidget">
+  <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{$ctrl.config.icon.set}}" icon-definition="{{$ctrl.config.icon.icon}}"></prm-icon>
+  {{$ctrl.config.prompt}}
 </button>
-<div class="chat-frame-wrap" ng-class="klasses" ng-show="showChatWidget">
+<div class="chat-frame-wrap" ng-class="$ctrl.klasses" ng-show="showChatWidget">
   <button class="chat-close ss-icon js-toggle-chat" title="Close chat window" ng-click="showChatWidget = !showChatWidget" aria-label="Close chat window">&times;</button>
-  <iframe title="Ask a Librarian Chat" class="chat-frame" ng-src="{{config.url | trustUrl}}" frameborder="0"></iframe>
+  <iframe title="Ask a Librarian Chat" class="chat-frame" ng-src="{{$ctrl.config.url | trustUrl}}" frameborder="0"></iframe>
 </div>

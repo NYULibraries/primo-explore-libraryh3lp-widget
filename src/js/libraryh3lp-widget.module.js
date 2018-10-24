@@ -11,66 +11,25 @@ angular
       }
     };
   }])
-  .factory('libraryh3lpWidgetResultsList', function () {
-    // A factory that is used to get/update state of 'results' across components
-    const model = {
-      length: 0
-    };
-    return {
-      updateLength(newLength) {
-        model.length = newLength;
-      },
-      getLength() {
-        return model.length;
-      }
-    };
-  })
-  .controller('libraryh3lpWidgetController', ['libraryh3lpWidgetConfig', '$scope', 'libraryh3lpWidgetResultsList', function (libraryh3lpWidgetConfig, $scope, libraryh3lpWidgetResultsList) {
-    // controller for the h3lp widget itself
-    let prevResultsListLength;
+  .controller('libraryh3lpWidgetController', ['libraryh3lpWidgetConfig', function (libraryh3lpWidgetConfig) {
     const ctrl = this;
     ctrl.$onInit = function () {
-      $scope.config = libraryh3lpWidgetConfig;
-      prevResultsListLength = libraryh3lpWidgetResultsList.getLength();
-      $scope.klasses = {
-        'chat-bottom-padding': !!prevResultsListLength,
+      ctrl.config = libraryh3lpWidgetConfig;
+      ctrl.klasses = {
+        'chat-bottom-padding': false
       };
     };
 
     ctrl.$doCheck = function () {
-      const newResultsListLength = libraryh3lpWidgetResultsList.getLength();
-      if (newResultsListLength !== prevResultsListLength) {
-        $scope.klasses['chat-bottom-padding'] = !!newResultsListLength;
-        prevResultsListLength = newResultsListLength;
-      }
+      ctrl.klasses = {
+        'chat-bottom-padding': Boolean(ctrl.parentCtrl.userSessionManagerService.searchStateService.resultObject.data.length)
+      };
     };
   }])
   .component('prmSilentLoginAfter', {
     controller: 'libraryh3lpWidgetController',
-    template
-  })
-  .controller('libraryh3lpWidgetResultsListController', ['libraryh3lpWidgetResultsList', function (libraryh3lpWidgetResultsList) {
-    // controller whose pure function is to maintain updated results length in the libraryh3lpWidgetResultsList factory
-    const ctrl = this;
-    let prevResultsListLength;
-    // Update length in the factory on initialize
-    ctrl.$onInit = function () {
-      prevResultsListLength = ctrl.parentCtrl.searchService.facetService.results.length;
-      libraryh3lpWidgetResultsList.updateLength(prevResultsListLength);
-    };
-
-    // If length change, update the factory
-    ctrl.$doCheck = function () {
-      const newResultsListLength = ctrl.parentCtrl.searchService.facetService.results.length;
-      if (newResultsListLength !== prevResultsListLength) {
-        libraryh3lpWidgetResultsList.updateLength(newResultsListLength);
-        prevResultsListLength = newResultsListLength;
-      }
-    };
-  }])
-  .component('prmExploreMainAfter', {
     bindings: {
       parentCtrl: '<',
     },
-    controller: 'libraryh3lpWidgetResultsListController',
+    template
   });
