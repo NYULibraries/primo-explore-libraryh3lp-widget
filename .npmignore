@@ -2,3 +2,4 @@ src/
 .*
 karma.conf.js
 yarn-error.log
+test-results
