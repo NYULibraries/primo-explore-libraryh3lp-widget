@@ -1,4 +1,4 @@
-const libraryh3lpWidgetConfig = __fixtures__['libraryh3lpWidgetConfig'];
+const libraryh3lpWidgetConfig = require('./fixtures/libraryh3lpWidgetConfig.iframe.json');
 
 describe('libraryh3lpWidget component', () => {
   beforeEach(module('libraryh3lpWidget', ($provide) => {

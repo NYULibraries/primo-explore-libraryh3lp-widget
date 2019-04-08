@@ -1,5 +1,6 @@
 {
-  "url": "https://us.libraryh3lp.com/chat/ask@chat.libraryh3lp.com?skin=1",
+  "mode": "script",
+  "url": "libraryh3lp.com/js/libraryh3lp.js?7516",
   "prompt": "Chat with us",
   "icon": {
     "set": "communication",
