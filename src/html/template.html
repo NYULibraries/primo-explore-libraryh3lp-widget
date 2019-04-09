@@ -4,6 +4,8 @@
 </button>
 <div class="chat-frame-wrap" ng-class="$ctrl.klasses" ng-show="showChatWidget">
   <button class="chat-close ss-icon js-toggle-chat" title="Close chat window" ng-click="showChatWidget = !showChatWidget" aria-label="Close chat window">&times;</button>
-  <iframe ng-if="$ctrl.mode === 'iframe'" title="Ask a Librarian Chat" class="chat-frame" ng-src="{{$ctrl.config.url | trustUrl}}" frameborder="0"></iframe>
-  <div ng-if="$ctrl.mode === 'script'" class="needs-js">Chat loading...</div>
+  <div ng-if="$ctrl.mode === 'iframe'" class="libraryh3lp chat-frame" data-cy="libraryh3lp-iframe-mode">
+    <iframe title="Ask a Librarian Chat" ng-src="{{$ctrl.config.url | trustUrl}}" frameborder="0"></iframe>
+  </div>
+  <div ng-if="$ctrl.mode === 'script'" class="needs-js" data-cy="libraryh3lp-script-mode">Chat loading...</div>
 </div>

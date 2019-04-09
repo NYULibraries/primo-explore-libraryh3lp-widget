@@ -14,7 +14,7 @@ const commonConfig = {
   devtool: 'sourcemap',
 };
 
-const webConfig = {.
+const webConfig = {
   target: 'web',
   output: {
     filename: 'primoExploreCustomRequests.min.js',

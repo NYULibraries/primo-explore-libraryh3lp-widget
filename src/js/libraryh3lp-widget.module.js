@@ -26,6 +26,7 @@ angular
           'This default will be deprecated in future verions.'+
           'In your configuration option, please select an explicit "mode" ("script" or "iframe")'
         );
+        ctrl.mode = 'iframe';
       }
     };
 
