@@ -18,6 +18,15 @@ angular
       ctrl.klasses = {
         'chat-bottom-padding': false
       };
+
+      ctrl.mode = libraryh3lpWidgetConfig.mode;
+
+      if (ctrl.mode === undefined) {
+        console.warn('By defaut, using the "iframe" setting for libaryh3lp widget.'+
+          'This default will be deprecated in future verions.'+
+          'In your configuration option, please select an explicit "mode" ("script" or "iframe")'
+        );
+      }
     };
 
     ctrl.$doCheck = function () {
@@ -32,4 +41,27 @@ angular
       parentCtrl: '<',
     },
     template
-  });
+  })
+  .factory('libraryh3lpInjectionService', ['libraryh3lpWidgetConfig', '$document', function (libraryh3lpWidgetConfig, $document) {
+    const { url, mode } = libraryh3lpWidgetConfig;
+    const document = $document[0];
+
+    return {
+      injectScript() {
+        if (mode !== 'script') {
+          return;
+        }
+        if (!url) {
+          console.warn(`library-h3lp configuration has set mode to 'script', but no 'url' paramater has been defined`);
+          return;
+        }
+
+        var x = document.createElement("script");
+        x.type = "text/javascript";
+        x.async = true;
+        x.src = (document.location.protocol === "https:" ? "https://" : "http://") + url.replace(/(^\w+:|^)\/\//, '');
+        var y = document.getElementsByTagName("script")[0];
+        y.parentNode.insertBefore(x, y);
+      }
+    };
+  }]);
