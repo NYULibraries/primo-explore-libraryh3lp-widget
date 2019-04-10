@@ -52,14 +52,17 @@ You'll need to configure the module by passing it an object as an angular `const
 
 | name | type | usage |
 |------|-------------|--------|
-| `url` | string | the iframe url for your instance of libraryh3lp |
+|`mode`| string | `'script'` or `'iframe`'`, identifying the type of libraryh3lp insertion method to use (see libraryh3lp documentation). |
+| `url` | string | the iframe or javascript url for your instance of libraryh3lp |
 | `prompt` | string | the text for the prompt when closed |
 | `icon` | object | defines the icon for the link. must be chosen from <https://material.io/icons/>. you need to specify both the name of the action "set" (see link) and the icon itself, in the form "ic_person_outline_24px". note that all icons do not work so you may have to experiment some |
 
 ### Example
 
+#### `mode: iframe`
 ```js
 app.constant('libraryh3lpWidgetConfig', {
+  mode: 'iframe',
   url: 'https://us.libraryh3lp.com/chat/ask@chat.libraryh3lp.com?skin=1',
   prompt: 'Chat with us',
   icon: {
@@ -67,6 +70,30 @@ app.constant('libraryh3lpWidgetConfig', {
     icon: 'ic_chat_24px'
   }
 });
+```
+
+#### `mode: script`
+```js
+app.constant('libraryh3lpWidgetConfig', {
+  mode: 'script',
+  // 'http' or 'https' will be handled based on the protocol of your Primo server.
+  url: 'libraryh3lp.com/js/libraryh3lp.js?7516',
+  prompt: 'Chat with us',
+  icon: {
+    set: 'communication',
+    icon: 'ic_chat_24px'
+  }
+});
+
+app.run(runBlock);
+
+runBlock.$inject = [
+  'libraryh3lpInjectionService',
+];
+
+function runBlock(libraryh3lpInjectionService) {
+  libraryh3lpInjectionService.injectScript();
+}
 ```
 
 ### Styles
