@@ -8,9 +8,9 @@ services:
     environment:
       NODE_ENV: test
       COVERALLS_REPO_TOKEN:
-    volumes:
-      - ./src/:/app/src/
-      - ./karma.conf.js:/app/karma.conf.js
+    # volumes:
+    #   - ./src/:/app/src/
+    #   - ./karma.conf.js:/app/karma.conf.js
   test-watch:
     build:
       context: .
