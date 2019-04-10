@@ -6,19 +6,21 @@
   },
   "rules": {
     "semi": 2,
-    "no-unused-vars": ["warn"]
+    "no-unused-vars": ["warn"],
+    "no-console": 0
   },
   "globals": {
     "__fixtures__": false,
     "angular": false,
     "module": false,
-    "inject": false
+    "inject": false,
+    "window": false,
+    "console": false,
+    "Promise": false,
+    "spyOnAllFunctions": false,
   },
   "env": {
     "jasmine": true,
     "node": true
-  },
-  "plugins": [
-    "angular"
-  ]
+  }
 }

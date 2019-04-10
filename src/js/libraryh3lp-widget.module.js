@@ -50,6 +50,7 @@ angular
     return {
       injectScript() {
         if (mode !== 'script') {
+          console.warn(`library-h3lp configuration 'mode' must be set to 'script' for 'injectScript' function to run`);
           return;
         }
         if (!url) {
