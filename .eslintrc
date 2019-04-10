@@ -1,0 +1,22 @@
+{
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "semi": 2,
+    "no-unused-vars": ["warn"],
+    "no-console": ["error", {
+      "allow": ["warn", "error"]
+    }]
+  },
+  "globals": {
+    "angular": true
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  }
+}

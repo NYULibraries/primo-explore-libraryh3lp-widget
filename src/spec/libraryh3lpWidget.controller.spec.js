@@ -1,4 +1,4 @@
-const libraryh3lpWidgetConfig = __fixtures__['libraryh3lpWidgetConfig'];
+const libraryh3lpWidgetConfig = require('./fixtures/libraryh3lpWidgetConfig.iframe.json');
 
 describe('libraryh3lpWidgetController', () => {
 
@@ -6,7 +6,7 @@ describe('libraryh3lpWidgetController', () => {
     $provide.constant('libraryh3lpWidgetConfig', libraryh3lpWidgetConfig);
   }));
 
-  let  $scope, $componentController;
+  let $scope, $componentController;
   let controller, bindings;
   const resultsList = [];
   beforeEach(inject(function (_$rootScope_, _$componentController_) {
@@ -30,7 +30,12 @@ describe('libraryh3lpWidgetController', () => {
   }));
 
   describe('$onInit', () => {
+
+    const ogLibraryh3lpWidgetConfig = Object.freeze(Object.assign({}, libraryh3lpWidgetConfig));
+
+    let consoleWarnSpy;
     beforeEach(() => {
+      consoleWarnSpy = spyOn(console, 'warn');
       controller.$onInit();
     });
 
@@ -46,12 +51,32 @@ describe('libraryh3lpWidgetController', () => {
       expect(controller.klasses).toBeDefined();
     });
 
+    it('should have no user warning', () => {
+      expect(console.warn).not.toHaveBeenCalled();
+    });
+
     describe('klasses', () => {
       describe(`'chat-bottom-padding'`, () => {
         it(`should be initialized as false`, () => {
           expect(controller.klasses['chat-bottom-padding']).toBe(false);
         });
       });
+    });
+
+    describe('when script is undefined, warns the user', () => {
+      beforeEach(() => {
+        libraryh3lpWidgetConfig.mode = undefined;
+      });
+
+      it('warns the user', () => {
+        controller.$onInit();
+        expect(console.warn).toHaveBeenCalled();
+      });
+    });
+
+    afterEach(() => {
+      consoleWarnSpy.calls.reset();
+      Object.assign(libraryh3lpWidgetConfig, ogLibraryh3lpWidgetConfig);
     });
   });
 
