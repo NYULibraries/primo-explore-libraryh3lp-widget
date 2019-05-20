@@ -17,8 +17,8 @@ const commonConfig = {
 const webConfig = {
   target: 'web',
   output: {
-    filename: 'primoExploreCustomRequests.min.js',
-    library: 'primoExploreCustomRequests',
+    filename: 'primoExploreLibraryH3lp.min.js',
+    library: 'primoExploreLibraryH3lp',
     libraryTarget: 'var',
   },
 };
@@ -26,7 +26,7 @@ const webConfig = {
 const nodeConfig = {
   target: 'node',
   output: {
-    library: 'primoExploreCustomRequests',
+    library: 'primoExploreLibraryH3lp',
   },
   optimization: {
     minimize: false,
