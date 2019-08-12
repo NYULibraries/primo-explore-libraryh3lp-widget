@@ -1,4 +1,5 @@
-.chat-tab, .chat-frame-wrap{
+.chat-tab,
+.chat-frame-wrap {
   position: fixed;
   bottom: 0;
   right: 10px;
@@ -6,14 +7,14 @@
   z-index: 200;
 }
 
-.chat-tab{
+.chat-tab {
   padding: 10px 10px 8px;
   font-size: 14px;
   border-radius: 3px 3px 0 0;
   font-weight: bold;
 }
 
-.chat-close{
+.chat-close {
   border: 0 none;
   background: #f5f7fa;
   font-size: 16px;
@@ -31,11 +32,20 @@
   color: #027bc2;
 }
 
-.chat-frame-wrap{
+.chat-frame-wrap {
   width: 300px;
+  background-color: #F5F5F5;
+  padding: 1em;
+  box-shadow: -5px -5px 20px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 3px 3px 0 0;
 }
 
-.chat-frame,.libraryh3lp iframe {
+.libraryh3lp {
+  margin: -1em;
+}
+
+.chat-frame,
+.libraryh3lp iframe {
   width: 300px !important;
   height: 280px !important;
   vertical-align: bottom !important;
@@ -47,6 +57,7 @@
   .chat-bottom-padding {
     bottom: 60px;
   }
+
   body.md-dialog-is-showing .chat-bottom-padding {
     bottom: 0 !important;
   }
