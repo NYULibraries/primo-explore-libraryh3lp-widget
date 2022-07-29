@@ -1,6 +1,6 @@
 {
   "name": "primo-explore-libraryh3lp-widget",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "ExLibris Primo New UI plugin for adding a libraryh3lp chat widget",
   "main": "./dist/index.js",
   "scripts": {
